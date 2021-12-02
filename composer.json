@@ -1,0 +1,49 @@
+{
+    "name": "naykel/orderit",
+    "description": "Package skeleton for NayKel Laravel packages.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nathan Watts",
+            "email": "nathan@naykel.com.au",
+            "homepage": "https://naykel.com.au"
+        }
+    ],
+    "homepage": "https://github.com/naykel76/orderit.git",
+    "keywords": [
+        "Laravel",
+        "Orderit",
+        "E-commerce",
+        "Naykel"
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Naykel\\Orderit\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Naykel\\Orderit\\Tests\\": "tests"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Naykel\\Orderit\\OrderitServiceProvider"
+            ]
+        }
+    }
+}
