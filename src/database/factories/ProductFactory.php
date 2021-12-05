@@ -1,16 +1,15 @@
 <?php
 
-namespace Database\Factories;
+namespace Naykel\Orderit\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Naykel\Orderit\Models\Product;
 
 class ProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+
+    protected $model = Product::class;
+
     public function definition()
     {
         if (rand(1, 3) == 3) {
