@@ -1,6 +1,6 @@
 {
     "name": "naykel/orderit",
-    "description": "Package skeleton for NayKel Laravel packages.",
+    "description": "E-commerce package for NayKel Laravel applications",
     "license": "MIT",
     "authors": [
         {
@@ -47,3 +47,4 @@
         }
     }
 }
+

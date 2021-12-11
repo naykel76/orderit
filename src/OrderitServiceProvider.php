@@ -8,8 +8,9 @@ use Livewire\Livewire;
 use Naykel\Orderit\Livewire\AddToCartButton;
 use Naykel\Orderit\Livewire\Cart;
 use Naykel\Orderit\Livewire\CartButton;
-use Naykel\Orderit\Repositories\Session\CartRepository;
+use Naykel\Orderit\Livewire\Checkout;
 use Naykel\Orderit\Repositories\Contracts\CartRepositoryContract;
+use Naykel\Orderit\Repositories\Session\CartRepository;
 
 class OrderitServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class OrderitServiceProvider extends ServiceProvider
             Livewire::component('add-to-cart-button', AddToCartButton::class);
             Livewire::component('cart', Cart::class);
             Livewire::component('cart-button', CartButton::class);
+            Livewire::component('checkout', Checkout::class);
         });
     }
 

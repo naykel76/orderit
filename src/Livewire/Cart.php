@@ -9,8 +9,8 @@ use Livewire\Component;
 class Cart extends Component
 {
     public array $cart = [];
-    public array $products = [];
-    public int $total = 0;
+    public array $cartItems = [];
+    public $total = 0.00;
     public $showCart = true;
 
     protected $listeners = [
@@ -18,18 +18,42 @@ class Cart extends Component
         'cartUpdated' => 'hydrate',
     ];
 
+
+    /**
+     * Mount component
+     * @return void
+     */
+    public function mount(): void
+    {
+        $this->refreshCart();
+    }
+
+
     /**
      * Hydrate component
      * @return void
      */
     public function hydrate(): void
     {
+        $this->refreshCart();
+    }
+
+    /**
+     * Refresh for current cart information
+     * @return void
+     */
+    public function refreshCart(): void
+    {
         $this->cart = cart()->all();
 
-        $this->products = tap(
-            $this->products(),
-            fn (Collection $products) => $this->total = $products->sum('total')
+        $this->cartItems = tap(
+            $this->cartItems(),
+            fn (Collection $cartItems) => $this->total = $cartItems->sum('total')
         )->toArray();
+
+        // make total available for checkout
+        session()->put('cartTotal', $this->total);
+
     }
 
     /**
@@ -37,7 +61,7 @@ class Cart extends Component
      *
      * @return Collection
      */
-    public function products(): Collection
+    public function cartItems(): Collection
     {
 
         if (empty($this->cart)) {
@@ -51,8 +75,9 @@ class Cart extends Component
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => $product->price,
-                    // 'formatted_price' => $product->formatted_price,
+                    'image' => $product->imageUrl(),
                     'qty' => $qty = $this->cart[$product->id],
+                    // push total to session???
                     'total' => $product->price * $qty,
                 ];
             });

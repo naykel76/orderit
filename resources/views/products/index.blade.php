@@ -1,8 +1,5 @@
 <x-gotime-app-layout layout="{{ config('naykel.template') }}">
 
-    <livewire:cart-button />
-
-
     <h1>List of products</h1>
 
     <div class="grid cols-4">
@@ -21,7 +18,7 @@
 
                     <div class="bx-content">
 
-                        <a href="{{ route('product.show', $product->id) }}">
+                        <a href="{{ route('products.show', $product->id) }}">
                             <h3>${{ $product->price }}</h3>
                             {{ $product->name }}
                         </a>

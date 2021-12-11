@@ -1,46 +1,52 @@
-<div>
+{{-- @if($showCart) --}}
+<div class="bx fg1 divider-y">
 
-    @if($showCart)
+    @forelse($cartItems as $item)
 
-        <div class="bx maxw600 mb">
+        <div class="cart-item">
 
-            <div class="bx-title">Cart Items</div>
+            <div class="flex gg">
+                <div class="flex-none w5">
+                    <a href="{{ route('products.show', $item->id) }}">
+                        <img src="{{ $item->image }}" width="100">
+                    </a>
+                </div>
 
-            <div class="bx-content">
-
-                @forelse($products as $product)
-
-                    <hr class="my-1">
-
-                    <div class="flex space-between ">
-
-                        <div>
-                            {{ $product->name }} <br>
-                            ${{ $product->price }}
-                        </div>
-
-                        <div>
-
-                            <x:gotime::icon wire:click="decrease({{ $product->id }})" icon="minus-round" />
-                            {{ $product->qty }}
-                            <x:gotime::icon wire:click="increase({{ $product->id }})" icon="plus-round" />
-                            <button wire:click="remove({{ $product->id }})" class="link txt-lower">remove</button>
-                        </div>
-
-                    </div>
-
-                @empty
-                    <p>No products in cart.</p>
-                @endforelse
+                <a href="{{ route('products.show', $item->id) }}">
+                    {{ $item->name }}
+                </a>
             </div>
 
-            <div class="bx-footer tar">
-                <strong>Total:</strong> ${{ $this->total }}
-                <button type="button" class="btn success"> Checkout </button>
+            <div class="cost-info flex va-t">
+
+                <div class="item-qty flex space-between va-c mal mr">
+                    <x:gotime::icon wire:click="decrease({{ $item->id }})" icon="minus-round-o" />
+                    <input type="text" class="w4 tac mx" value="{{ $item->qty }}" disabled>
+                    <x:gotime::icon wire:click="increase({{ $item->id }})" icon="plus-round-o" />
+                </div>
+
+                <div class="item-price tar nm">
+                    <div class="txt-xl lh1"><strong>${{ number_format($item->total, 2) }}</strong></div>
+                    <div class="txt-sm txt-muted">unit price ${{ $item->price }}</div>
+                    <div wire:click="remove({{ $item->id }})" class="cursor-pointer ml-2 ntm"><small>remove</small></div>
+                </div>
+
             </div>
 
         </div>
 
-    @endif
+    @empty
+
+        <p>No items in cart.</p>
+
+    @endforelse
+
+
+    {{-- <div class="bx-footer tar">
+        <strong>Total:</strong> ${{ number_format($this->total, 2) }}
+    <button type="button" class="btn success"> Checkout </button>
+</div> --}}
 
 </div>
+
+{{-- @endif --}}
